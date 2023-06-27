@@ -25,4 +25,4 @@ jobs:
           ls
           pwd
           zip -r build.zip *
-          aws s3 cp build.zip  s3://github-action10/frontend/
+          aws s3 cp build.zip  s3://mytest500/frontend/
