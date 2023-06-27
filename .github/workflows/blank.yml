@@ -12,14 +12,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install dependencies
-        run:  npm install 
-        shell: bash
-     
-      - name: Run build
-        run: npm run build
-        shell: bash
-
-
+        run: |  
+          npm install
+          npm run build
       - name: Run SSM command
         env:
           AWS_REGION: ap-south-1
