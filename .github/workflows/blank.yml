@@ -1,0 +1,33 @@
+name: SSM EC2 Action
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-command:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run:  npm install 
+        shell: bash
+     
+      - name: Run build
+        run: npm run build
+        shell: bash
+
+
+      - name: Run SSM command
+        env:
+          AWS_REGION: ap-south-1
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        #running commands 
+        run: |
+          ls
+          pwd
+          zip -r build.zip *
+          aws s3 cp build.zip  s3://github-action10/frontend/
